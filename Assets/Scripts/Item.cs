@@ -1,16 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Item : MonoBehaviour
 {
+    public int price = 0;
+    float rotationSpeed = 30f;
+    [SerializeField] private GameObject meshGameObject, uiGameObject;
 
-    float rotationSpeed = 30f; // Speed of the rotation, in degrees per second
+    private void Start()
+    {
+        uiGameObject.GetComponent<TMP_Text>().text = "$" + price;
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        // Rotate the GameObject around the Y-axis at a given speed per second
-        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        meshGameObject.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
+
+    private void OnMouseUpAsButton()
+    {
+        if (Money.i.Spend(price))
+        {
+            LevelManager.i.PurchaseItem(gameObject);
+        }
+    }
+    
+    
 }
