@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
-        if(currentLevelIndex>=allLevels.Count) return;
+        if(currentLevelIndex + 1 >=allLevels.Count) return;
         DeleteDisplayingItems();
         currentLevelIndex++;
         DisplayCurrentLevel();
@@ -76,7 +76,7 @@ public class LevelManager : MonoBehaviour
     {
         foreach (GameObject go in displayingItems)
         {
-            Destroy(go);
+            if(!bagItems.Contains(go)) Destroy(go);
         }
 
         displayingItems = new List<GameObject>();
@@ -95,7 +95,7 @@ public class LevelManager : MonoBehaviour
         {
             GameObject go = newItemList[i];
             displayingItems.Add(go);
-            go.transform.position = baseShopItemLocation + new Vector3(4f,0,0) * (i%5) + new Vector3(0,3,0) * (int)(i/5);
+            go.transform.position = baseShopItemLocation + new Vector3(4f,0,0) * (i%5) + new Vector3(0,-3,0) * (int)(i/5);
         }
     }
     
