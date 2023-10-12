@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     {
         public int newAge;
         public int newMoney;
-        public List<GameObject> newItems;
+        public GameObject allItemsParent;
     }
 
     public List<Level> allLevels;
@@ -58,7 +58,7 @@ public class LevelManager : MonoBehaviour
     public void PurchaseItem(GameObject go)
     {
         int i = bagItems.Count;
-        go.transform.position = baseBagItemLocation + new Vector3(2,0,0) * (i%7) + new Vector3(0,2,0) * (int)(i/7);
+        go.transform.position = baseBagItemLocation + new Vector3(4,0,0) * (i%5) + new Vector3(0,-3,0) * (int)(i/5);
         bagItems.Add(go);
     }
     
@@ -86,11 +86,16 @@ public class LevelManager : MonoBehaviour
     {
         displayingItems = new List<GameObject>();
         Level currentLevel = allLevels[currentLevelIndex];
-        for(int i = 0; i<currentLevel.newItems.Count; i++)
+        List<GameObject> newItemList = new List<GameObject>();
+        foreach (Transform tf in currentLevel.allItemsParent.transform)
         {
-            GameObject go = currentLevel.newItems[i];
+            newItemList.Add(tf.gameObject);
+        }
+        for(int i = 0; i<newItemList.Count; i++)
+        {
+            GameObject go = newItemList[i];
             displayingItems.Add(go);
-            go.transform.position = baseShopItemLocation + new Vector3(2,0,0) * (i%7) + new Vector3(0,2,0) * (int)(i/7);
+            go.transform.position = baseShopItemLocation + new Vector3(4f,0,0) * (i%5) + new Vector3(0,3,0) * (int)(i/5);
         }
     }
     
