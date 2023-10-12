@@ -19,6 +19,8 @@ public class Money : MonoBehaviour
             return instance;
         }
     }
+
+    private int age = 100;
     
     public int amount;
     [SerializeField] private GameObject uiGameObject;
@@ -40,7 +42,13 @@ public class Money : MonoBehaviour
 
     void UpdateUI()
     {
-        uiGameObject.GetComponent<TMP_Text>().text = "Pocket Money $ " + amount;
+        uiGameObject.GetComponent<TMP_Text>().text = "Pocket Money \n $ " + amount + "\n Age: " + age;
         //print("we have money: " + amount);
+    }
+
+    public void ChangeAge(int newAge)
+    {
+        age = newAge;
+        UpdateUI();
     }
 }

@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
     {
         DisplayNewItems();
         Money.i.Gain(allLevels[currentLevelIndex].newMoney);
+        Money.i.ChangeAge(allLevels[currentLevelIndex].newAge);
     }
 
     void DeleteDisplayingItems()
@@ -95,7 +96,7 @@ public class LevelManager : MonoBehaviour
         {
             GameObject go = newItemList[i];
             displayingItems.Add(go);
-            go.transform.position = baseShopItemLocation + new Vector3(4f,0,0) * (i%5) + new Vector3(0,-3,0) * (int)(i/5);
+            go.transform.position = baseShopItemLocation + new Vector3(4f,0,0) * (i%5) + new Vector3(0,-4,0) * (int)(i/5);
         }
     }
     
